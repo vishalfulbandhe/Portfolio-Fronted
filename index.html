@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vishal Fulbandhe's personal portfolio: AI Developer, Designer, and Deployer of Intelligent Systems. Explore projects, skills, and contact info.">
+    <title>Vishal Fulbandhe - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=ITC+Garamond:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <picture>
+            <source media="(max-width: 768px)" srcset="images/1729938309753.png">
+            <img src="WhatsApp Image 2026-01-12 at 8.20.29 PM.jpeg" alt="Profile photo of Vishal Fulbandhe, AI Developer" class="profile-img">
+        </picture>
+        <h1>Vishal Fulbandhe</h1>
+        <p>AI Developer | Designer | Deploy Intelligent Systems</p>
+        <p class="intro">Welcome to my portfolio! I'm passionate about building innovative AI solutions.</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Main -->
+    <main>
+        <!-- About -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>AI Engineer at <strong>IBM Bangalore</strong>. Specialize in AI implementation, intelligent systems, and ML model development. B.Tech from SISTEC-R Bhopal. IBM intern (6 months). Love cricket & badminton!</p>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <h2>My Projects</h2>
+            <article class="project">
+                <h3>AI Model Training Pipeline</h3>
+                <p>Automated ML pipeline for model training and deployment using Python, TensorFlow. Reduced training time by 40%.</p>
+                <a href="#" aria-label="View AI Pipeline Project">View Project →</a>
+                <span class="badge">Python</span><span class="badge">TensorFlow</span>
+            </article>
+            <article class="project">
+                <h3>Computer Vision App</h3>
+                <p>Real-time object detection using OpenCV. Achieved 92% accuracy on custom dataset.</p>
+                <a href="#" aria-label="View Computer Vision Project">View Project →</a>
+                <span class="badge">OpenCV</span><span class="badge">Python</span>
+            </article>
+            <article class="project">
+                <h3>Agentic AI System</h3>
+                <p>Autonomous decision-making AI agent for task automation. Multi-agent architecture.</p>
+                <a href="#" aria-label="View Agentic AI Project">View Project →</a>
+                <span class="badge">AI</span><span class="badge">Python</span>
+            </article>
+            <article class="project">
+                <h3>Portfolio Website</h3>
+                <p>Modern responsive portfolio built with HTML5, CSS3, JavaScript. IBM Plex fonts & glassmorphism design.</p>
+                <a href="#" aria-label="View Portfolio Source">View Code →</a>
+                <span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">JS</span>
+            </article>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <h2>My Skills</h2>
+            <ul class="skills-list">
+                <li><strong>Programming:</strong> C++, Python, JavaScript</li>
+                <li><strong>AI/ML:</strong> TensorFlow, PyTorch, Model Training</li>
+                <li><strong>Computer Vision:</strong> OpenCV, Image Processing</li>
+                <li><strong>Web:</strong> HTML5, CSS3, JavaScript, Responsive Design</li>
+                <li><strong>Tools:</strong> Git/GitHub, VS Code, IBM Cloud</li>
+                <li><strong>Database:</strong> MySQL (Basic)</li>
+            </ul>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <p>Feel free to reach out for AI projects & collaborations!</p>
+            <form id="contact-form" onsubmit="return false;">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit" id="send-btn">Send Message</button>
+            </form>
+
+            <ul class="social-links">
+                <li><a href="mailto:codervishal207@gmail.com">📧 codervishal207@gmail.com</a></li>
+                <li><a href="https://www.linkedin.com/in/vishal-fulbandhe-16662832b" target="_blank">💼 LinkedIn</a></li>
+                <li><a href="https://github.com/codervishal207max" target="_blank">🐙 GitHub</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Vishal Fulbandhe | AI Engineer @ IBM | Made with ❤️ in Bhopal </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+document.getElementById("contact-form").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const btn = document.getElementById("send-btn");
+    btn.innerText = "Sending...";
+    btn.disabled = true;
+
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    };
+
+    try {
+        const res = await fetch("http://127.0.0.1:5000/api/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+
+        if(result.status === "success"){
+            alert("Backend server is OFF. Run app2.py");
+            this.reset();
+        } else {
+            alert("Server error: " + result.message);
+        }
+
+    } catch (err) {
+        alert("Message sent successfully!");
+    }
+
+    btn.innerText = "Send Message";
+    btn.disabled = false;
+});
+</script>

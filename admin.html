@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vishal Admin Inbox</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .msg {
+            background: #1e293b;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .email {
+            color: #38bdf8;
+        }
+        .date {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>📩 Vishal Portfolio Inbox</h1>
+<div id="messages">Loading...</div>
+
+<script>
+async function loadMessages() {
+    try {
+        const res = await fetch("http://127.0.0.1:5000/api/messages");
+        const data = await res.json();
+
+        const box = document.getElementById("messages");
+        box.innerHTML = "";
+
+        if (data.length === 0) {
+            box.innerHTML = "<p>No messages yet</p>";
+            return;
+        }
+
+        data.forEach(msg => {
+            box.innerHTML += `
+                <div style="background:#1e293b;padding:15px;margin:10px;border-radius:8px;">
+                    <strong>${msg.name}</strong><br>
+                    <span style="color:#38bdf8;">${msg.email}</span><br><br>
+                    <div>${msg.message}</div>
+                    <small style="color:#94a3b8;">${msg.date}</small>
+                </div>
+            `;
+        });
+
+    } catch (err) {
+        document.getElementById("messages").innerHTML = "❌ Server Offline";
+    }
+}
+
+loadMessages();
+</script>
